@@ -26,7 +26,7 @@ TukeyHSD(AOVfit)
 
 
 
-#Subset
+#Here's me playing with the island data.
 #Island data
 LizsIs<-Lizs[Lizs$Island=="Cuba" | Lizs$Island=="Puerto Rico" | Lizs$Island=="Hispaniola",]
 table(LizsIs$Island)

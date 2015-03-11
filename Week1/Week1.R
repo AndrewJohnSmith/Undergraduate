@@ -1,5 +1,6 @@
 #Wednesday Class
 #Comments using the '#'
+  #These will not execute in the console
 
 5
 
@@ -19,7 +20,10 @@ X * Andrew
 
 #Using a function.
 #Set a working directory - all your files will be in here
-	#using the help files - put a '?' in front of your function
+  #Use >Session>Set Working Directory>Choose Directory
+  #Can also use setwd("YourDirectoryHere")
+
+#using the help files - put a '?' in front of your function
 ?list.files()
 
 list.files()
@@ -38,9 +42,10 @@ FD[1, ]
 	#Access column one
 FD[ ,1]	
 
+  #Row 5 and all columns etc.
 FD[5, ]
 FD[ ,3]
-
+#Both row 1 and column 3
 FD[1,3]
 
 #Accessing multiple rows

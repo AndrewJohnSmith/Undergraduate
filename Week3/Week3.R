@@ -15,6 +15,8 @@ table(LizsRed$Island)
 
 #Making a boxplot
 ?boxplot
+  #We can use a formula which takes the form Y variable by X variable
+  #This translates to continuous variable by discrete variable
 boxplot(SVL~Island, data=LizsRed)
 
 #LizsEco subset - "CG" | "TG"
