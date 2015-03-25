@@ -1,0 +1,659 @@
+Canids<-MyData[MyData$Group==2,]
+Mustelids<-MyData[MyData$Group==9,]#
+Felids<-MyData[MyData$Group==5,]
+Calds<-rbind(Canids,Felids, Mustelids)
+head(Calds)
+?TukeyHSD
+Fit<-aov(Mass~Group, data = Calds)
+TukeyHSD(Fit)
+str(Calds)
+Calds$Group<-as.factor(Clads$Group)
+Calds$Group<-as.factor(Calds$Group)
+Fit<-aov(Mass~Group, data = Calds)
+TukeyHSD(Fit)
+Calds$Temperate<-as.factor(Calds$Temperate)
+Fit<-aov(Mass~Group*Temperate, data = Calds)
+TukeyHSD(Fit)
+Fit<-aov(Mass~Temperate, data = Calds)
+TukeyHSD(Fit)
+MustelidsTe<-MyData[MyData$Group==9 & MyData$Temperate==1,]
+MustelidsTe
+MustelidsTr<-MyData[MyData$Group==9 & MyData$Temperate==2,]
+FelidsTe<-MyData[MyData$Group==5 & MyData$Temperate==1,]#
+FelidsTr<-MyData[MyData$Group==5 & MyData$Temperate==2,]
+FelidsTe
+FelidsTr
+CanidsTe<-MyData[MyData$Group==2 & MyData$Temperate==1,]#
+CanidsTr<-MyData[MyData$Group==2 & MyData$Temperate==2,]
+CanidsTe
+CanidsTr
+Tropical<-rbind(MustelidsTr, CanidsTr, FelidsTr)
+Temperate<-rbind(MustelidsTe, CanidsTe, FelidsTe)#
+Temperate$Group<-as.factor(Temperate$Group)
+Fit<-aov(Mass~Group,data=Tropical)
+TukeyHSD(Fit)
+Tropical$Group<-as.factor(Tropical$Group)
+Fit<-aov(Mass~Group,data=Tropical)
+TukeyHSD(Fit)
+Fit<-aov(Mass~Group,data=Temperate)#
+TukeyHSD(Fit)
+phylANOVA?
+?phylANOVA
+Clades<-rbind(Canids,Felids, Mustelids)#
+#
+Calds$Group<-as.factor(Calds$Group)#
+Calds$Temperate<-as.factor(Calds$Temperate)
+Tree<-read.nexus("~/Dropbox/Amherst/Project/Moduarity/JawPics/Paper/Data/Correlations/CarnivoraCon.nex")
+Clades<-rbind(Canids,Felids, Mustelids)
+Pruning<-treedata(Tree, Clades)
+Ctree<-Pruning$phy#
+CTree<-ladderize(Ctree)#
+CData<-Pruning$data#
+CData <- CData[match(CTree$tip.label, rownames(CData)),]#
+#
+CTree<-multi2di(CTree)#
+CTree$edge.length[CTree$edge.length == 0] <- 0.0000001
+X<-CData$Groups
+X<-CData$Group
+CData
+CData<-as.data.frame(CData)
+X<-CData$Group
+X
+Y<-CData$Mass
+Y
+Y<-as.numeric(CData$Mass)
+Y
+Y<-as.numeric(as.character(CData$Mass))
+Y
+names(Y)<-rownames(CData)
+Y
+phylANOVA(CTree,X, Y)
+X<-CData$Temperate
+X
+phylANOVA(CTree, X, Y)
+t.test(Mass~Temperate, data=CData)
+head(CData)
+str(CData)
+t.test(Y~X)
+boxplot(Mass~Group, data=CData)
+boxplot(Mass~Group, data= Clades)
+points(Mass~Group, data= Clades)
+Tree<-read.nexus("~/Dropbox/Amherst/Project/Moduarity/JawPics/Paper/Data/Correlations/CarnivoraCon.nex")
+Tree
+251/246
+246/251
+6/40
+4/35
+11/57
+MyData<-read.csv("~/Dropbox/Amherst/Project/Moduarity/JawPics/Paper/Data/Correlations/Yeah.csv", row.names=1)
+Tree<-read.nexus("~/Dropbox/Amherst/Project/Moduarity/JawPics/Paper/Data/Correlations/CarnivoraCon.nex")
+Tree
+MyData<-read.csv("~/Dropbox/Amherst/Project/Moduarity/JawPics/Paper/Data/Correlations/Yeah.csv", row.names=1)
+Pruning<-treedata(Tree, MyData)#
+#Pruning<-treedata(Tree, FD)#
+#
+Ctree<-Pruning$phy#
+CTree<-ladderize(Ctree)#
+CData<-Pruning$data#
+CData <- CData[match(CTree$tip.label, rownames(CData)),]#
+#
+CTree<-multi2di(CTree)#
+CTree$edge.length[CTree$edge.length == 0] <- 0.0000001
+CTree
+207/252
+CanRates<-read.csv("~/Dropbox/Amherst/Project/Moduarity/JawPics/Paper/Data/Correlations/Rates/CanidRates.csv")
+t.test(CanRates[,2]~CanRates[,6])
+CanRates[,2]
+t.test(CanRates[,3]~CanRates[,6])
+CanRates<-read.csv("~/Dropbox/Amherst/Project/Moduarity/JawPics/Paper/Data/Correlations/Rates/FelidRates.csv")
+t.test(CanRates[,2]~CanRates[,6])
+t.test(CanRates[,3]~CanRates[,6])
+CanRates<-read.csv("~/Dropbox/Amherst/Project/Moduarity/JawPics/Paper/Data/Correlations/Rates/MustelidRates.csv")
+t.test(CanRates[,2]~CanRates[,6])
+t.test(CanRates[,3]~CanRates[,6])
+Tree<-read.nexus("~/Dropbox/Amherst/Project/Moduarity/JawPics/Paper/Data/Correlations/CarnivoraCon.nex")
+MyData<-read.csv("~/Dropbox/Amherst/Project/Moduarity/JawPics/Paper/Data/Correlations/Yeah.csv", row.names=1)
+Canids<-MyData[MyData$Group==2,]
+Felids<-MyData[MyData$Group==5,]
+Mustelids<-MyData[MyData$Group==9,]
+MustelidsTe<-MyData[MyData$Group==9 & MyData$Temperate==1,]#
+MustelidsTr<-MyData[MyData$Group==9 & MyData$Temperate==2,]#
+FelidsTe<-MyData[MyData$Group==5 & MyData$Temperate==1,]#
+FelidsTr<-MyData[MyData$Group==5 & MyData$Temperate==2,]#
+CanidsTe<-MyData[MyData$Group==2 & MyData$Temperate==1,]#
+CanidsTr<-MyData[MyData$Group==2 & MyData$Temperate==2,]
+dttFullCIs<-function (phy, data, disp = "avg.sq", nsims = 1000, mdi.range = c(0, 1),ciRange=c(0.025,0.975), color = "gray81") #
+{#
+    td <- treedata(phy, data)#
+    dtt.data <- dtt(td$phy, td$data, disp, plot=F)#
+    ltt <- sort(as.numeric(branching.times(td$phy)), decreasing = TRUE)#
+    ltt <- c(0, (max(ltt) - ltt)/max(ltt))#
+   plot(ltt, dtt.data$dtt, type = "l",col="black",lwd = 2, xlab = "Relative time", ylab = "Disparity")#
+    s <- ratematrix(td$phy, td$data)#
+    sims <- sim.char(td$phy, s, nsims)#
+    dtt.sims<-matrix(NA, nrow=dim(sims)[3], ncol=dim(sims)[1])#
+    for(i in 1:dim(sims)[3]){#
+    dtt.sim <- dtt(td$phy, sims[,,i], plot=F)#
+    dtt.sims[i,] <- dtt.sim$dtt#
+        }#
+    quantiles<-numeric()#
+for (i in 1:length(ltt)){#
+	range<-quantile(dtt.sims[,i], ciRange)#
+	quantiles<-rbind(quantiles,range)#
+	}#
+median.sims <- apply(dtt.sims, 2, median)#
+x<-rep(ltt,2)#
+y<-(quantiles[,1])#
+y<-append(y,quantiles[,2])#
+polygon(x,y,border=color,col = color)#
+#
+lines(ltt, median.sims, lty = 2,lwd=1.5)#
+lines(ltt,dtt.data$dtt,lty= 1,lwd=2.5)#
+#
+    MDI <- Between.Curves(ltt, apply(dtt.sims, 2, median),dtt.data$dtt, mdi.range)#
+ as.data.frame(dtt.sims)->simframe#
+#
+mdiNull<-numeric(nsims)#
+for (i in 1: nsims){#
+	MDIsim <- Between.Curves(ltt, simframe[i,],dtt.data$dtt, mdi.range)#
+	mdiNull[i]<-MDIsim#
+	}#
+if(MDI<0){#
+which(mdiNull>0) -> pos#
+(length(pos)/nsims) -> prop#
+#
+}else {which(mdiNull<0) -> pos#
+(length(pos)/nsims)->prop#
+}#
+    return(list(dtt.data = dtt.data$dtt, dtt.sims = dtt.sims, times = ltt, #
+        MDI = MDI,Pvalue=prop))#
+}#
+Between.Curves<-function (x, f1, f2, xrange = c(0, 1)) #
+{#
+    a <- 0#
+    for (i in 1:length(x)) {#
+        if (x[i] >= xrange[1] & x[i] <= xrange[2]) {#
+            if (i == 1) {#
+                lhs <- 0#
+            }#
+            else if (x[i - 1] < xrange[1]) {#
+                lhs <- xrange[1]#
+            }#
+            else lhs <- x[i - 1]#
+            if (i == length(x)) {#
+                rhs <- x[i]#
+            }#
+            else if (x[i + 1] > xrange[2]) {#
+                rhs <- xrange[2]#
+            }#
+            else rhs <- x[i + 1]#
+            a <- a + (f2[i] - f1[i]) * (rhs - lhs)/2#
+        }#
+        else if (i != 1) #
+            if (x[i - 1] >= xrange[1] & x[i - 1] <= xrange[2]) {#
+                y1 <- f1[i - 1] + (f1[i] - f1[i - 1]) * (xrange[2] - #
+                  x[i - 1])/(x[i] - x[i - 1])#
+                y2 <- f2[i - 1] + (f2[i] - f2[i - 1]) * (xrange[2] - #
+                  x[i - 1])/(x[i] - x[i - 1])#
+                a <- a + (y2 - y1) * (xrange[2] - x[i - 1])/2#
+            }#
+            else if (i != length(x)) #
+                if (x[i + 1] >= xrange[1] & x[i + 1] <= xrange[2]) {#
+                  y1 <- f1[i] + (f1[i + 1] - f1[i]) * (xrange[1] - #
+                    x[i])/(x[i + 1] - x[i])#
+                  y2 <- f2[i] + (f2[i + 1] - f2[i]) * (xrange[1] - #
+                    x[i])/(x[i + 1] - x[i])#
+                  a <- a + (y2 - y1) * (x[i + 1] - xrange[1])/2#
+                }#
+    }#
+    return(a)#
+}
+Pruning<-treedata(Tree, MustelidsTe)#
+#Pruning<-treedata(Tree, FD)#
+#
+Ctree<-Pruning$phy#
+CTree<-ladderize(Ctree)#
+CData<-Pruning$data#
+CData <- CData[match(CTree$tip.label, rownames(CData)),]#
+#
+CTree<-multi2di(CTree)#
+CTree$edge.length[CTree$edge.length == 0] <- 0.0000001#
+#
+CData<-as.data.frame(CData)
+head(CData)
+dttFullCIs(CTree,CData[,9:12],nsims=50)
+dttFullCIs(CTree,CData[,9:12],nsims=1000)
+str(CData)
+CData[,9]<-as.numeric(as.character(CData[,9]))#
+CData[,10]<-as.numeric(as.character(CData[,10]))#
+CData[,11]<-as.numeric(as.character(CData[,11]))#
+CData[,12]<-as.numeric(as.character(CData[,12]))
+str(CData)
+dttFullCIs(CTree,CData[,9:12],nsims=1000)
+Pruning<-treedata(Tree, MustelidsTr)#
+#Pruning<-treedata(Tree, FD)#
+#
+Ctree<-Pruning$phy#
+CTree<-ladderize(Ctree)#
+CData<-Pruning$data#
+CData <- CData[match(CTree$tip.label, rownames(CData)),]#
+#
+CTree<-multi2di(CTree)#
+CTree$edge.length[CTree$edge.length == 0] <- 0.0000001#
+#
+CData<-as.data.frame(CData)#
+#
+CData[,9]<-as.numeric(as.character(CData[,9]))#
+CData[,10]<-as.numeric(as.character(CData[,10]))#
+CData[,11]<-as.numeric(as.character(CData[,11]))#
+CData[,12]<-as.numeric(as.character(CData[,12]))#
+#
+dttFullCIs(CTree,CData[,9:12],nsims=1000)
+Pruning<-treedata(Tree, FelidsTe)#
+#Pruning<-treedata(Tree, FD)#
+#
+Ctree<-Pruning$phy#
+CTree<-ladderize(Ctree)#
+CData<-Pruning$data#
+CData <- CData[match(CTree$tip.label, rownames(CData)),]#
+#
+CTree<-multi2di(CTree)#
+CTree$edge.length[CTree$edge.length == 0] <- 0.0000001#
+#
+CData<-as.data.frame(CData)#
+#
+CData[,9]<-as.numeric(as.character(CData[,9]))#
+CData[,10]<-as.numeric(as.character(CData[,10]))#
+CData[,11]<-as.numeric(as.character(CData[,11]))#
+CData[,12]<-as.numeric(as.character(CData[,12]))#
+#
+dttFullCIs(CTree,CData[,9:12],nsims=1000)
+Pruning<-treedata(Tree, FelidsTr)#
+#Pruning<-treedata(Tree, FD)#
+#
+Ctree<-Pruning$phy#
+CTree<-ladderize(Ctree)#
+CData<-Pruning$data#
+CData <- CData[match(CTree$tip.label, rownames(CData)),]#
+#
+CTree<-multi2di(CTree)#
+CTree$edge.length[CTree$edge.length == 0] <- 0.0000001#
+#
+CData<-as.data.frame(CData)#
+#
+CData[,9]<-as.numeric(as.character(CData[,9]))#
+CData[,10]<-as.numeric(as.character(CData[,10]))#
+CData[,11]<-as.numeric(as.character(CData[,11]))#
+CData[,12]<-as.numeric(as.character(CData[,12]))#
+#
+dttFullCIs(CTree,CData[,9:12],nsims=1000)
+Pruning<-treedata(Tree, CanidsTe)#
+#Pruning<-treedata(Tree, FD)#
+#
+Ctree<-Pruning$phy#
+CTree<-ladderize(Ctree)#
+CData<-Pruning$data#
+CData <- CData[match(CTree$tip.label, rownames(CData)),]#
+#
+CTree<-multi2di(CTree)#
+CTree$edge.length[CTree$edge.length == 0] <- 0.0000001#
+#
+CData<-as.data.frame(CData)#
+#
+CData[,9]<-as.numeric(as.character(CData[,9]))#
+CData[,10]<-as.numeric(as.character(CData[,10]))#
+CData[,11]<-as.numeric(as.character(CData[,11]))#
+CData[,12]<-as.numeric(as.character(CData[,12]))#
+#
+dttFullCIs(CTree,CData[,9:12],nsims=1000)
+Pruning<-treedata(Tree, CanidsTr)#
+#Pruning<-treedata(Tree, FD)#
+#
+Ctree<-Pruning$phy#
+CTree<-ladderize(Ctree)#
+CData<-Pruning$data#
+CData <- CData[match(CTree$tip.label, rownames(CData)),]#
+#
+CTree<-multi2di(CTree)#
+CTree$edge.length[CTree$edge.length == 0] <- 0.0000001#
+#
+CData<-as.data.frame(CData)#
+#
+CData[,9]<-as.numeric(as.character(CData[,9]))#
+CData[,10]<-as.numeric(as.character(CData[,10]))#
+CData[,11]<-as.numeric(as.character(CData[,11]))#
+CData[,12]<-as.numeric(as.character(CData[,12]))#
+#
+dttFullCIs(CTree,CData[,9:12],nsims=1000)
+AllTe<-MyData[MyData$Temperate==1,]#
+AllTr<-MyData[MyData$Temperate==2,]
+Pruning<-treedata(Tree, AllTe)#
+#Pruning<-treedata(Tree, FD)#
+#
+Ctree<-Pruning$phy#
+CTree<-ladderize(Ctree)#
+CData<-Pruning$data#
+CData <- CData[match(CTree$tip.label, rownames(CData)),]#
+#
+CTree<-multi2di(CTree)#
+CTree$edge.length[CTree$edge.length == 0] <- 0.0000001#
+#
+CData<-as.data.frame(CData)#
+#
+CData[,9]<-as.numeric(as.character(CData[,9]))#
+CData[,10]<-as.numeric(as.character(CData[,10]))#
+CData[,11]<-as.numeric(as.character(CData[,11]))#
+CData[,12]<-as.numeric(as.character(CData[,12]))#
+#
+dttFullCIs(CTree,CData[,9:12],nsims=1000)
+AllTe<-MyData[MyData$Temperate==1 & MyData$Habitat==1,]
+AllTe
+AllTr<-MyData[MyData$Temperate==2 & MyData$Habitat==1,]
+AllTr
+AllTr<-MyData[MyData$Temperate==2 & MyData$Habitat==1,]
+AllTe<-MyData[MyData$Temperate==1 & MyData$Habitat==1,]
+Pruning<-treedata(Tree, AllTe)#
+#Pruning<-treedata(Tree, FD)#
+#
+Ctree<-Pruning$phy#
+CTree<-ladderize(Ctree)#
+CData<-Pruning$data#
+CData <- CData[match(CTree$tip.label, rownames(CData)),]#
+#
+CTree<-multi2di(CTree)#
+CTree$edge.length[CTree$edge.length == 0] <- 0.0000001#
+#
+CData<-as.data.frame(CData)#
+#
+CData[,9]<-as.numeric(as.character(CData[,9]))#
+CData[,10]<-as.numeric(as.character(CData[,10]))#
+CData[,11]<-as.numeric(as.character(CData[,11]))#
+CData[,12]<-as.numeric(as.character(CData[,12]))#
+#
+dttFullCIs(CTree,CData[,9:12],nsims=1000)
+Pruning<-treedata(Tree, AllTr)#
+#Pruning<-treedata(Tree, FD)#
+#
+Ctree<-Pruning$phy#
+CTree<-ladderize(Ctree)#
+CData<-Pruning$data#
+CData <- CData[match(CTree$tip.label, rownames(CData)),]#
+#
+CTree<-multi2di(CTree)#
+CTree$edge.length[CTree$edge.length == 0] <- 0.0000001#
+#
+CData<-as.data.frame(CData)#
+#
+CData[,9]<-as.numeric(as.character(CData[,9]))#
+CData[,10]<-as.numeric(as.character(CData[,10]))#
+CData[,11]<-as.numeric(as.character(CData[,11]))#
+CData[,12]<-as.numeric(as.character(CData[,12]))#
+#
+dttFullCIs(CTree,CData[,9:12],nsims=1000)
+SData<-read.csv("~/Desktop/ShrewPreyTable.csv")
+require(ggplot2)
+SData$Number <- as.numeric(SData$Number)#
+#
+PreyTable <- ggplot(Prey, aes(x = Hardness,y = Number)) + geom_bar(aes(fill = Group), stat="identity",position = "dodge")#
+#
+  PreyTable  + theme(axis.text.x=element_text(size = rel(1.5), angle=90), axis.text = element_text(colour = "black"))
+SData$Number <- as.numeric(SData$Number)#
+#
+PreyTable <- ggplot(SData, aes(x = Hardness,y = Number)) + geom_bar(aes(fill = Group), stat="identity",position = "dodge")#
+#
+  PreyTable  + theme(axis.text.x=element_text(size = rel(1.5), angle=90), axis.text = element_text(colour = "black"))
+SData<-read.csv("~/Desktop/ShrewPreyTable.csv")
+SData$Number <- as.numeric(SData$Number)#
+#
+PreyTable <- ggplot(SData, aes(x = Hardness,y = Number)) + geom_bar(aes(fill = Group), stat="identity",position = "dodge")#
+#
+  PreyTable  + theme(axis.text.x=element_text(size = rel(1.5), angle=90), axis.text = element_text(colour = "black"))
+X<-c(50,#
+285,#
+390,#
+60,#
+15)
+sum(X)
+Dana<-read.csv("~/Downloads/Dana Thesis tooth data.csv", na.strings="", rownmaes=2)
+Dana<-read.csv("~/Downloads/Dana Thesis tooth data.csv", na.strings="", rownames=2)
+Dana<-read.csv("~/Downloads/Dana Thesis tooth data.csv", na.strings="", row.names=2)
+head(Dana)
+str(Dana)
+Dana$Skull.Length<-as.numeric(as.character(Dana$Skull.Length))
+Dana
+str(Dana)
+var.test(Dana$CL,Dana$CW)
+Dana<-read.csv("~/Downloads/Dana Thesis tooth data.csv", na.strings="", row.names=2)
+Dana<-read.csv("~/Downloads/Dana Thesis tooth data.csv", na.strings="", row.names=2)
+require(ape); require(geiger); require(phytools)
+Tree<-read.nexus("~/Dropbox/Amherst/Project/Moduarity/JawPics/Paper/Data/Correlations/CarnivoraCon.nex")
+Pruning<-treedata(Tree, Dana)#
+#Pruning<-treedata(Tree, FD)#
+#
+Ctree<-Pruning$phy#
+CTree<-ladderize(Ctree)#
+CData<-Pruning$data#
+CData <- CData[match(CTree$tip.label, rownames(CData)),]#
+#
+CTree<-multi2di(CTree)#
+CTree$edge.length[CTree$edge.length == 0] <- 0.0000001#
+#
+CData<-as.data.frame(CData)
+Dana
+Dana<-read.csv("~/Downloads/Dana Thesis tooth data.csv", na.strings="", row.names=3)
+Tree<-read.nexus("~/Dropbox/Amherst/Project/Moduarity/JawPics/Paper/Data/Correlations/CarnivoraCon.nex")#
+#
+Pruning<-treedata(Tree, Dana)#
+#Pruning<-treedata(Tree, FD)#
+#
+Ctree<-Pruning$phy#
+CTree<-ladderize(Ctree)#
+CData<-Pruning$data#
+CData <- CData[match(CTree$tip.label, rownames(CData)),]#
+#
+CTree<-multi2di(CTree)#
+CTree$edge.length[CTree$edge.length == 0] <- 0.0000001#
+#
+CData<-as.data.frame(CData)
+Dana<-read.csv("~/Downloads/Dana Thesis tooth data.csv", na.strings="", row.names=3)
+Tree<-read.nexus("~/Dropbox/Amherst/Project/Moduarity/JawPics/Paper/Data/Correlations/CarnivoraCon.nex")
+Pruning<-treedata(Tree, Dana)#
+#Pruning<-treedata(Tree, FD)#
+#
+Ctree<-Pruning$phy#
+CTree<-ladderize(Ctree)#
+CData<-Pruning$data#
+CData <- CData[match(CTree$tip.label, rownames(CData)),]#
+#
+CTree<-multi2di(CTree)#
+CTree$edge.length[CTree$edge.length == 0] <- 0.0000001#
+#
+CData<-as.data.frame(CData)
+CData
+CData<-as.data.frame(CData)
+CData
+str(CData)
+for(i in 3:ncol(CData)){#
+CData[,i]<-as.numeric(as.character(CData[,i]))#
+}
+str(CData)
+CData
+bm.CTree<-corBrownian(phy=CTree)#
+gls.teeth <- gls(Skull.Length~Mandible.length, correlation=bm.CTree, data= CData)#
+summary(bm.gls.teeth)
+require(ape); require(geiger); require(phytools); require(nlme)
+bm.CTree<-corBrownian(phy=CTree)#
+gls.teeth <- gls(Skull.Length~Mandible.length, correlation=bm.CTree, data= CData)#
+summary(bm.gls.teeth)
+?gls
+gls.teeth <- gls(Skull.Length~Mandible.length, correlation=bm.CTree, data= CData, na.action="na.omit")
+?na.action
+na.action(na.omit(CData))
+na.omit(CData)
+na.omit(CData[,1:4])
+SkullJaw<-na.omit(CData[,1:4])
+SkullJaw<-na.omit(Dana[,1:4])
+Pruning<-treedata(Tree, SkullJaw)#
+#Pruning<-treedata(Tree, FD)#
+#
+Ctree<-Pruning$phy#
+CTree<-ladderize(Ctree)#
+CData<-Pruning$data#
+CData <- CData[match(CTree$tip.label, rownames(CData)),]#
+#
+CTree<-multi2di(CTree)#
+CTree$edge.length[CTree$edge.length == 0] <- 0.0000001#
+#
+CData<-as.data.frame(CData)
+CData
+str(CData)
+CData<-as.data.frame(CData)#
+for(i in 3:ncol(CData)){#
+CData[,i]<-as.numeric(as.character(CData[,i]))#
+}
+CData
+Dana<-read.csv("~/Downloads/Dana Thesis tooth data.csv", na.strings="", row.names=3)
+Tree<-read.nexus("~/Dropbox/Amherst/Project/Moduarity/JawPics/Paper/Data/Correlations/CarnivoraCon.nex")
+SkullJaw<-na.omit(Dana[,1:4])
+Pruning<-treedata(Tree, SkullJaw)#
+#Pruning<-treedata(Tree, FD)#
+#
+Ctree<-Pruning$phy#
+CTree<-ladderize(Ctree)#
+CData<-Pruning$data#
+CData <- CData[match(CTree$tip.label, rownames(CData)),]#
+#
+CTree<-multi2di(CTree)#
+CTree$edge.length[CTree$edge.length == 0] <- 0.0000001#
+#
+CData<-as.data.frame(CData)#
+for(i in 3:ncol(CData)){#
+CData[,i]<-as.numeric(as.character(CData[,i]))#
+}
+bm.CTree<-corBrownian(phy=CTree)
+gls.teeth <- gls(Skull.Length~Mandible.length, correlation=bm.CTree, data= CData, na.action="na.omit")
+summary(bm.gls.teeth)
+summary(gls.teeth)
+plot(Skull.Length~Mandible.length, data=CData, col=unclass(CData$Family))#
+abline(gls.teeth, col="red")
+plot(Skull.Length~Mandible.length, data=CData, col=unclass(CData$Family), pch=20)
+abline(gls.teeth, col="red")
+Dana<-read.csv("~/Downloads/Dana Thesis tooth data.csv", na.strings="", row.names=3)
+head(Dana)
+plot(CTree)
+axisPhylo()
+?var.test
+Dana$CL
+Dana$CW
+var.test(Dana$CL,Dana$CW)
+Dana$CL*Dana$CW
+var.test(Dana$CL/Dana$CW,Dana$P1L/Dana$P1W)
+Dana$CL/Dana$CW
+Dana$P1L/Dana$P1W
+var.test(Dana$CL/Dana$CW,Dana$P2L/Dana$P2W)
+Dana$P2L/Dana$P2W
+boxplot(Dana$CL/Dana$CW)
+New<-cbind(Dana$CL/Dana$CW,Dana$P2L/Dana$P2W)
+New
+New<-rbind(Dana$CL/Dana$CW,Dana$P2L/Dana$P2W)
+New
+New<-c(Dana$CL/Dana$CW,Dana$P2L/Dana$P2W)
+New
+As<-rep(A,35)
+As<-rep("A",35)
+Bs<-rep("B",35)
+News<-c(As,Bs)
+News
+Yeah<-cbind(News,New)
+Yeah
+str(Yeah)
+Yeah<-as.data.frame(Yeah)
+Yeah
+boxplot(News~New,data=Yeah)
+str(Yeah)
+Yeah[,2]<-as.numeric(as.character(Yeah[,2]))
+boxplot(News~New,data=Yeah)
+str(Yeah)
+boxplot(New~News,data=Yeah)
+?boxplot
+summary(gls.teeth)
+TukeyHSD?
+?TukeyHSD
+TukeyHSD(MYAOV)
+#Set working directory using >Session>Set Working Directory>Choose Directory#
+setwd("/Users/Home/Desktop/RClass/Week4")#
+#Read in the data#
+Lizs<-read.csv("anolisData.csv", na.strings="?", row.names=1)#
+table(Lizs$ecomorph)#
+#
+#Subset#
+#LizsEco subset - "CG" | "TG"#
+LizsEco<-Lizs[Lizs$ecomorph=="CG" | Lizs$ecomorph=="TG" | Lizs$ecomorph=="TC",]#
+table(LizsEco$ecomorph)#
+#
+#let's look at the data#
+boxplot(SVL~ecomorph, data=LizsEco)#
+#
+#Let's run an ANOVA - are there differences between the populations?#
+AOVfit<-aov(SVL~ecomorph, data=LizsEco)#
+summary(AOVfit)#
+#Yes! Highly significant... but there are three groups.#
+  #We now need to conduct a post-hoc comparison test.#
+#
+#This tests all the groups against each other and corrects for Type II error.#
+TukeyHSD(AOVfit)#
+  #TG-TC appears t
+setwd("/Users/Home/Dropbox/Amherst/Courses/SOURCE/Undergraduate/Week4")#
+#Read in the data#
+Lizs<-read.csv("anolisData.csv", na.strings="?", row.names=1)#
+table(Lizs$ecomorph)#
+#
+#Subset#
+#LizsEco subset - "CG" | "TG"#
+LizsEco<-Lizs[Lizs$ecomorph=="CG" | Lizs$ecomorph=="TG" | Lizs$ecomorph=="TC",]#
+table(LizsEco$ecomorph)#
+#
+#let's look at the data#
+boxplot(SVL~ecomorph, data=LizsEco)#
+#
+#Let's run an ANOVA - are there differences between the populations?#
+AOVfit<-aov(SVL~ecomorph, data=LizsEco)#
+summary(AOVfit)#
+#Yes! Highly significant... but there are three groups.#
+  #We now need to conduct a post-hoc comparison test.#
+#
+#This tests all the groups against each other and corrects for Type II error.#
+TukeyHSD(AOVfit)
+plot(Skull.Length~Mandible.length, data=CData, col=unclass(CData$Family), pch=20)#
+abline(gls.teeth, col="red")
+Tree<-read.nexus("~/Dropbox/Amherst/Project/Moduarity/JawPics/Paper/Data/Correlations/CarnivoraCon.nex")
+SkullJaw<-na.omit(Dana[,1:4])
+SkullJaw
+Pruning<-treedata(Tree, SkullJaw) #removes any data not in the tree.#
+#
+Ctree<-Pruning$phy #Extracts the new tree#
+CTree<-ladderize(Ctree)#
+plot(CTree) #plots the tree#
+CData<-Pruning$data #Extracts the new data frame
+Ctree<-Pruning$phy #Extracts the new tree
+plot(Ctree) #plots the tree
+par(mfrow=c(1,2))
+plot(Ctree) #plots the tree
+plot(CTree) #plots the tree
+plot(CTree) #plots the tree
+plot(Ctree) #plots the tree
+CData <- CData[match(CTree$tip.label, rownames(CData)),]
+CTree<-multi2di(CTree)
+CTree$edge.length[CTree$edge.length == 0] <- 0.0000001 #... and adds 100,000 years to the split
+CData<-as.data.frame(CData) #Checks the data is a dataframe and makes the numeric data.#
+for(i in 3:ncol(CData)){#
+CData[,i]<-as.numeric(as.character(CData[,i]))#
+}
+bm.CTree<-corBrownian(phy=CTree)
+gls.teeth <- gls(Skull.Length~Mandible.length, correlation=bm.CTree, data= CData)
+summary(gls.teeth)
+plot(Skull.Length~Mandible.length, data=CData, col=unclass(CData$Family), pch=20)
+abline(gls.teeth, col="red")
+FIT<-lm(Skull.Length~Mandible.length,data= CData)
+plot(Skull.Length~Mandible.length, data=CData, col=unclass(CData$Family), pch=20)
+abline(FIT, col="blue")
